@@ -132,9 +132,9 @@ header {
   margin-bottom: 30px;
   color: #fff;
 }
-/* Explore Button: slightly bigger but still compact, left-aligned */
+/* Explore Button*/
 #cta {
-  padding: 12px 24px; /* Increased padding for a bigger button */
+  padding: 12px 24px;
   font-size: 1.1em;
   border: none;
   background: #87CEFA;
@@ -223,7 +223,6 @@ section:last-of-type {
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  /* Removed min-height for a more efficient layout */
 }
 .contact-info {
   text-align: center;
