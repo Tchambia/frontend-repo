@@ -1,0 +1,289 @@
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overscroll-behavior: none; /* Prevent overscroll white space */
+}
+body {
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  color: #fff;
+  /* Custom background for the whole page (except hero uses its own) */
+  background: url('../Images/custom-bg.jpg') no-repeat center center/cover;
+}
+
+/* Navbar */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Transparent black */
+  z-index: 100;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Logo left, nav links right */
+  align-items: center;
+  padding: 20px 10%; /* Using 10% horizontal padding */
+}
+.logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #87CEFA;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  font-weight: bold;
+  gap: 20px;
+}
+.nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  position: relative;
+  transition: color 0.3s;
+}
+.nav-links li a:hover {
+  color: #87CEFA;
+}
+.nav-links li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background: #87CEFA;
+  transition: width 0.3s;
+}
+.nav-links li a:hover::after {
+  width: 100%;
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: #fff;
+  margin: 4px 0;
+}
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 8px;
+    display: none;
+    gap: 10px;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* Hero Section */
+#hero {
+  position: relative;
+  height: 100vh;
+  scroll-snap-align: start;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../Images/hero-bg.jpg') no-repeat center center/cover; /* Replace with your hero image */
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  padding: 0 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.hero-content h1 {
+  font-size: 4em;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.hero-content p {
+  font-size: 1.5em;
+  margin-bottom: 30px;
+  color: #fff;
+}
+/* Explore Button: slightly bigger but still compact, left-aligned */
+#cta {
+  padding: 12px 24px; /* Increased padding for a bigger button */
+  font-size: 1.1em;
+  border: none;
+  background: #87CEFA;
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 30px;
+  align-self: flex-start;
+}
+#cta:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px #87CEFA;
+}
+/* Optional wave element for a smooth bottom transition */
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url('wave.svg') no-repeat bottom center;
+  background-size: cover;
+  z-index: 2;
+}
+
+/* Other Sections (non-hero) */
+section:not(#hero) {
+  padding: 100px 20px;
+  max-width: 1200px;
+  margin: 120px auto 20px auto;  /* Provides distinct spacing between sections */
+  background: rgba(51, 51, 51, 0.9);
+  color: #fff;
+  border-radius: 8px;
+  scroll-snap-align: start;
+}
+section:not(#hero) h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5em; /* Consistent heading size */
+}
+
+/* Ensure first and last sections have no extra whitespace */
+section:first-of-type {
+  margin-top: 0;
+}
+section:last-of-type {
+  margin-bottom: 0;
+}
+
+/* About Section */
+.about-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Projects Grid */
+.project-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.project-item {
+  background: #444;
+  padding: 20px;
+  flex: 1 1 calc(33% - 40px);
+  max-width: 300px;
+  text-align: center;
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.project-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+}
+
+/* Contact Section */
+#contact {
+  padding: 40px 20px;
+}
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  /* Removed min-height for a more efficient layout */
+}
+.contact-info {
+  text-align: center;
+}
+.contact-info h2 {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.contact-info p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.social-icons a svg {
+  transition: transform 0.3s;
+}
+.social-icons a:hover svg {
+  transform: scale(1.2);
+}
+.contact-form {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #ccc;
+}
+.contact-form button {
+  padding: 10px;
+  border: none;
+  background: #87CEFA;
+  color: #000;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.contact-form button:hover {
+  background: #7ac0e0;
+  transform: scale(1.05);
+}
