@@ -74,7 +74,7 @@ header {
   text-decoration: none;
   color: var(--white);
   position: relative;
-  transition: color var(--transition-speed);
+  transition: color var(--transition-speed) ease;
 }
 
 .nav-links li a:hover {
@@ -89,26 +89,50 @@ header {
   width: 0;
   height: 2px;
   background: var(--primary-color);
-  transition: width var(--transition-speed);
+  transition: width var(--transition-speed) ease;
 }
 
 .nav-links li a:hover::after {
   width: 100%;
 }
 
+/* ============================================
+           Hamburger Icon Styles
+============================================ */
 .hamburger {
   display: none;
   flex-direction: column;
   cursor: pointer;
+  z-index: 101;
+  background: transparent; 
+  border: none;
+  padding: 0;
 }
 
 .hamburger span {
   width: 25px;
   height: 3px;
-  background: var(--white);
+  background: var(--primary-color);  /* Blue color for the hamburger */
   margin: 4px 0;
+  transition: all var(--transition-speed) ease-in-out;
 }
 
+/* When hamburger is open, animate into an "X" */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ============================================
+               Mobile Navigation
+============================================ */
 @media (max-width: 768px) {
   .nav-links {
     position: absolute;
@@ -118,11 +142,18 @@ header {
     background: var(--bg-dark);
     padding: 20px;
     border-radius: var(--border-radius-medium);
-    display: none;
     gap: 10px;
+    /* Completely hide until activated */
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform var(--transition-speed) ease-in-out,
+                opacity var(--transition-speed) ease-in-out;
   }
   .nav-links.open {
-    display: flex;
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
   }
   .hamburger {
     display: flex;
@@ -172,8 +203,11 @@ header {
   color: var(--white);
 }
 
+/* ============================================
+           Explore Button (CTA) 
+============================================ */
 #cta {
-  padding: 12px 24px;
+  padding: 12px 24px; /* Increased padding for a bigger button */
   font-size: 1.1em;
   border: none;
   background: var(--primary-color);
@@ -182,6 +216,12 @@ header {
   transition: transform var(--transition-speed), box-shadow var(--transition-speed);
   border-radius: var(--border-radius-large);
   align-self: flex-start;
+}
+
+/* Focus styling only on the Explore button */
+#cta:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--primary-color);
 }
 
 #cta:hover {
@@ -306,29 +346,35 @@ section:last-of-type {
   transform: scale(1.2);
 }
 
+/* ============================================
+         Glassy Transparent Contact Form
+============================================ */
 .contact-form {
   width: 100%;
   max-width: 500px;
-  padding: 20px;
-  background: var(--bg-contact-form);
   border: 1px solid var(--border-contact-form);
   border-radius: var(--border-radius-medium);
+  background: var(--bg-contact-form); /* Slightly translucent background */
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  padding: 20px;
 }
 
 .contact-form form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 15px; /* Spacing between fields */
 }
 
 .contact-form input,
 .contact-form textarea {
+  width: 100%;
   padding: 10px;
   border: none;
   border-radius: var(--border-radius-small);
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2); /* Slight transparency for fields */
   color: var(--white);
+  transition: box-shadow var(--transition-speed);
 }
 
 .contact-form input::placeholder,
@@ -336,17 +382,36 @@ section:last-of-type {
   color: #ccc;
 }
 
+/* Focus styling for contact form inputs */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--primary-color);
+}
+
+/* ============================================
+              Shiny Hover Button
+============================================ */
 .contact-form button {
-  padding: 10px;
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1em;
   border: none;
+  border-radius: var(--border-radius-large);
   background: var(--primary-color);
   color: var(--black);
-  border-radius: var(--border-radius-large);
   cursor: pointer;
-  transition: background var(--transition-speed), transform var(--transition-speed);
+  transition: background var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 
 .contact-form button:hover {
-  background: #7ac0e0;
+  /* Subtle highlight from top, creating a shiny effect */
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.3), var(--primary-color));
   transform: scale(1.05);
+  box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Button active state */
+.contact-form button:active {
+  transform: scale(0.98);
 }
