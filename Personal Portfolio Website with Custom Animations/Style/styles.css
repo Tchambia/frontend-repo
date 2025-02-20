@@ -29,7 +29,13 @@ html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   overflow-x: hidden;
-  overscroll-behavior: none; /* Prevent overscroll white space */
+}
+
+@supports (overscroll-behavior: contain) {
+  html {
+    overscroll-behavior: contain; /* Fallback for Safari on iOS < 16 */
+    overscroll-behavior: none; /* Prevent overscroll white space */
+  }
 }
 
 body {
@@ -354,9 +360,9 @@ section:last-of-type {
   max-width: 500px;
   border: 1px solid var(--border-contact-form);
   border-radius: var(--border-radius-medium);
-  background: var(--bg-contact-form); /* Slightly translucent background */
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px); /* For Safari */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  backdrop-filter: blur(10px);
   padding: 20px;
 }
 
@@ -415,3 +421,16 @@ section:last-of-type {
 .contact-form button:active {
   transform: scale(0.98);
 }
+
+/* ============================================
+                  Footer
+  ============================================ */
+  #footer {
+    background: var(--bg-dark);
+    padding: 20px;
+    text-align: center;
+    color: var(--white);
+    font-size: 0.9em;
+    margin-top: 40px;
+  }
+  
